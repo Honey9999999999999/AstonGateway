@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: aston-gateway
+  cloud:
+    bus:
+      enabled: true
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          configuration:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, busrefresh # Открываем нужные эндпоинты
+  endpoint:
+    shutdown:
+      enabled: true # Позволит изящно завершать работу (для prod)
+
+debug: true
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.config.client: DEBUG
