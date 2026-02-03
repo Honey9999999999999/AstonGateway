@@ -7,19 +7,24 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: kafka:9092
           configuration:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
             value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh, busrefresh # Открываем нужные эндпоинты
+        include: refresh, busrefresh
   endpoint:
     shutdown:
-      enabled: true # Позволит изящно завершать работу (для prod)
+      enabled: true
 
 debug: true
 logging:
